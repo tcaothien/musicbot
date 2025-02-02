@@ -10,12 +10,12 @@ async function stop(client, interaction, lang) {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.stop.embed.noActivePlayer, 
+                    name: "Không có trình phát nhạc đang hoạt động", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.stop.embed.noActivePlayerDescription);
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+                .setDescription("Hiện không có bài hát nào đang phát để dừng!");
 
             await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
             return;
@@ -27,26 +27,26 @@ async function stop(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setAuthor({ 
-                name: lang.stop.embed.musicHalted, 
+                name: "Đã dừng phát nhạc", 
                 iconURL: musicIcons.stopIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.stop.embed.musicHaltedDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Nhạc đã được dừng và trình phát đã bị hủy!");
 
         await interaction.reply({ embeds: [embed] });
 
     } catch (error) {
-        console.error('Error processing stop command:', error);
+        console.error('Lỗi khi thực hiện lệnh dừng phát nhạc:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.stop.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.stop.embed.errorDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Đã xảy ra lỗi khi dừng phát nhạc. Vui lòng thử lại sau!");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -54,7 +54,7 @@ async function stop(client, interaction, lang) {
 
 module.exports = {
     name: "stop",
-    description: "Stop the current song and destroy the player",
+    description: "Dừng bài hát hiện tại và hủy trình phát",
     permissions: "0x0000000000000800",
     options: [],
     run: stop
