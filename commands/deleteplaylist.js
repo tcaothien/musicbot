@@ -13,12 +13,12 @@ async function deletePlaylist(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.deleteplaylist.embed.playlistNotFound, 
+                    name: "Không tìm thấy danh sách phát", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.deleteplaylist.embed.playlistNotFoundDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setDescription("Danh sách phát bạn muốn xóa không tồn tại.")
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
@@ -29,12 +29,12 @@ async function deletePlaylist(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.deleteplaylist.embed.accessDenied, 
+                    name: "Truy cập bị từ chối", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.deleteplaylist.embed.accessDeniedDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setDescription("Bạn không có quyền xóa danh sách phát này.")
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
@@ -46,12 +46,12 @@ async function deletePlaylist(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.deleteplaylist.embed.playlistNotFound, 
+                    name: "Không tìm thấy danh sách phát", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.deleteplaylist.embed.playlistNotFoundDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setDescription("Danh sách phát bạn muốn xóa không tồn tại.")
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
@@ -61,27 +61,27 @@ async function deletePlaylist(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor('#00ff00')
             .setAuthor({ 
-                name: lang.deleteplaylist.embed.playlistDeleted, 
+                name: "Danh sách phát đã bị xóa", 
                 iconURL: musicIcons.correctIcon,
                 url: config.SupportServer
             })
-            .setDescription(lang.deleteplaylist.embed.playlistDeletedDescription.replace("{playlistName}", playlistName))
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setDescription(`Danh sách phát **${playlistName}** đã được xóa thành công.`)
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp();
 
         await interaction.reply({ embeds: [embed] });
     } catch (error) {
-        console.error('Error deleting playlist:', error);
+        console.error('Lỗi khi xóa danh sách phát:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.deleteplaylist.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp()
-            .setDescription(lang.deleteplaylist.embed.errorDescription);
+            .setDescription("Đã xảy ra lỗi khi xóa danh sách phát. Vui lòng thử lại sau.");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -89,12 +89,12 @@ async function deletePlaylist(client, interaction, lang) {
 
 module.exports = {
     name: 'deleteplaylist',
-    description: 'Delete a playlist',
+    description: 'Xóa một danh sách phát',
     permissions: '0x0000000000000800',
     options: [
         {
             name: 'name',
-            description: 'Enter playlist name',
+            description: 'Nhập tên danh sách phát',
             type: ApplicationCommandOptionType.String,
             required: true
         }
