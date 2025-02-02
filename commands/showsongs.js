@@ -13,12 +13,12 @@ async function showSongs(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.showsongs.embed.error, 
+                    name: "Lỗi", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.showsongs.embed.playlistNotFound);
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+                .setDescription("Không tìm thấy danh sách phát. Vui lòng kiểm tra lại tên danh sách!");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
@@ -28,12 +28,12 @@ async function showSongs(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.showsongs.embed.accessDenied, 
+                    name: "Truy cập bị từ chối", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.showsongs.embed.noPermission);
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+                .setDescription("Bạn không có quyền truy cập danh sách phát này!");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
@@ -49,12 +49,12 @@ async function showSongs(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#00ff00')
                 .setAuthor({ 
-                    name: lang.showsongs.embed.songsInPlaylist.replace("{playlistName}", playlistName), 
+                    name: `Danh sách bài hát trong "${playlistName}"`, 
                     iconURL: musicIcons.playlistIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.showsongs.embed.noSongs);
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+                .setDescription("Danh sách phát này không có bài hát nào.");
 
             await interaction.reply({ embeds: [embed] });
             return;
@@ -68,26 +68,26 @@ async function showSongs(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#00ff00')
                 .setAuthor({ 
-                    name: lang.showsongs.embed.songsInPlaylistPage.replace("{playlistName}", playlistName).replace("{currentPage}", index + 1).replace("{totalPages}", songChunks.length), 
+                    name: `Danh sách bài hát trong "${playlistName}" (Trang ${index + 1}/${songChunks.length})`, 
                     iconURL: musicIcons.playlistIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
                 .setDescription(description);
 
             await interaction.reply({ embeds: [embed], ephemeral: index !== 0 }); 
         }
     } catch (error) {
-        console.error('Error showing songs:', error);
+        console.error('Lỗi khi hiển thị danh sách bài hát:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.showsongs.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.showsongs.embed.errorDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Đã xảy ra lỗi khi lấy danh sách bài hát. Vui lòng thử lại sau!");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -95,12 +95,12 @@ async function showSongs(client, interaction, lang) {
 
 module.exports = {
     name: 'showsongs',
-    description: 'Show all songs in a playlist',
+    description: 'Hiển thị tất cả bài hát trong danh sách phát',
     permissions: '0x0000000000000800',
     options: [
         {
             name: 'playlist',
-            description: 'Enter playlist name',
+            description: 'Nhập tên danh sách phát',
             type: ApplicationCommandOptionType.String,
             required: true
         }
