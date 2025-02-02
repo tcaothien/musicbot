@@ -100,14 +100,14 @@ function initializePlayer(client) {
                 iconURL: musicIcons.playerIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: `Phát triển bởi Gwwennn | New Life Music v1.2`, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: `Phát triển bởi New Life | New Life Music v1.2`, iconURL: musicIcons.heartIcon })
             .setTimestamp()
             .setDescription(  
                 `- **Tiêu đề:** [${track.info.title}](${track.info.uri})\n` +
                 `- **Tác giả:** ${track.info.author || 'Nghệ sĩ không xác định'}\n` +
                 `- **Thời gian:** ${formatDuration(track.info.length)}\n` +
                 `- **Người yêu cầu:** ${requester}\n` +
-                `- **Nguồn:** ${track.info.sourceName}\n` + '**- Điều khiển :**\n 🔁 `Lặp lại`  ❌ `Tắt lặp lại`  ⏹️ `Dừng`  ⏭️ `Bỏ qua`\n ⏸️ `Tạm dừng`  ▶️ `Tiếp tục`  🔊 `Tăng âm lượng`  🔉 `Giảm âm lượng`'
+                `- **Nguồn:** ${track.info.sourceName}\n`
             )
             .setImage('attachment://musicard.png')
             .setColor('#FF7A00');
