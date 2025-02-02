@@ -107,7 +107,7 @@ function initializePlayer(client) {
                 `- **Tác giả:** ${track.info.author || 'Nghệ sĩ không xác định'}\n` +
                 `- **Thời gian:** ${formatDuration(track.info.length)}\n` +
                 `- **Người yêu cầu:** ${requester}\n` +
-                `- **Nguồn:** ${track.info.sourceName}\n` + '**- Điều khiển :**\n 🔁 `Lặp lại`, ❌ `Tắt`, ⏭️ `Bỏ qua`, 📜 `Hàng đợi`, 🗑️ `Xóa`\n ⏹️ `Dừng`, ⏸️ `Tạm dừng`, ▶️ `Tiếp tục`, 🔊 `Tăng âm lượng`, 🔉 `Giảm âm lượng`'
+                `- **Nguồn:** ${track.info.sourceName}\n` + '**- Điều khiển :**\n 🔁 `Lặp lại`  ❌ `Tắt lặp lại`  ⏹️ `Dừng`  ⏭️ `Bỏ qua`\n ⏸️ `Tạm dừng`  ▶️ `Tiếp tục`  🔊 `Tăng âm lượng`  🔉 `Giảm âm lượng`'
             )
             .setImage('attachment://musicard.png')
             .setColor('#FF7A00');
@@ -203,8 +203,8 @@ function formatDuration(ms) {
 
 function setupCollector(client, player, channel, message) {
     const filter = i => [
-        'loopToggle', 'skipTrack', 'disableLoop', 'showQueue', 'clearQueue',
-        'stopTrack', 'pauseTrack', 'resumeTrack', 'volumeUp', 'volumeDown'
+        'loopToggle', 'skipTrack', 'stopTrack', 'disableLoop',
+        'pauseTrack', 'resumeTrack', 'volumeUp', 'volumeDown'
     ].includes(i.customId);
 
     const collector = message.createMessageComponentCollector({ filter, time: 600000 }); // Set timeout if desired
@@ -353,16 +353,15 @@ function createActionRow1(disabled) {
         .addComponents(
             new ButtonBuilder().setCustomId("loopToggle").setEmoji('🔁').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("disableLoop").setEmoji('❌').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
-            new ButtonBuilder().setCustomId("skipTrack").setEmoji('⏭️').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
-            new ButtonBuilder().setCustomId("showQueue").setEmoji('📜').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
-            new ButtonBuilder().setCustomId("clearQueue").setEmoji('🗑️').setStyle(ButtonStyle.Secondary).setDisabled(disabled)
+            new ButtonBuilder().setCustomId("stopTrack").setEmoji('⏹️').setStyle(ButtonStyle.Danger).setDisabled(disabled),
+            new ButtonBuilder().setCustomId("skipTrack").setEmoji('⏭️').setStyle(ButtonStyle.Secondary).setDisabled(disabled)
+          
         );
 }
 
 function createActionRow2(disabled) {
     return new ActionRowBuilder()
         .addComponents(
-            new ButtonBuilder().setCustomId("stopTrack").setEmoji('⏹️').setStyle(ButtonStyle.Danger).setDisabled(disabled),
             new ButtonBuilder().setCustomId("pauseTrack").setEmoji('⏸️').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("resumeTrack").setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("volumeUp").setEmoji('🔊').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
