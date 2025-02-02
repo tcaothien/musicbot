@@ -10,12 +10,12 @@ async function filters(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({
-                    name: lang.filters.embed.error,
+                    name: "Lỗi",
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.filters.embed.noPlayer);
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
+                .setDescription("Không có trình phát nào đang hoạt động trong máy chủ này.");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
@@ -25,12 +25,12 @@ async function filters(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({
-                    name: lang.filters.embed.error,
+                    name: "Lỗi",
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.filters.embed.wrongChannel);
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
+                .setDescription("Bạn cần tham gia kênh thoại cùng với bot để sử dụng lệnh này.");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
@@ -40,7 +40,7 @@ async function filters(client, interaction, lang) {
 
         if (selectedFilter === 'clear') {
             player.filters.clearFilters();
-            await interaction.reply({ content: lang.filters.embed.filtersCleared, ephemeral: true });
+            await interaction.reply({ content: "Tất cả bộ lọc đã được xóa.", ephemeral: true });
             return;
         }
 
@@ -73,24 +73,24 @@ async function filters(client, interaction, lang) {
                 player.filters.setBassboost(true, { value: 3 });
                 break;
             default:
-                await interaction.reply({ content: lang.filters.embed.invalidFilter, ephemeral: true });
+                await interaction.reply({ content: "Bộ lọc không hợp lệ. Vui lòng chọn một bộ lọc từ danh sách.", ephemeral: true });
                 return;
         }
 
-        await interaction.reply({ content: lang.filters.embed.filterApplied.replace("{filter}", selectedFilter), ephemeral: true });
+        await interaction.reply({ content: `Bộ lọc **${selectedFilter}** đã được áp dụng.`, ephemeral: true });
 
     } catch (error) {
-        console.error('Error processing filters command:', error);
+        console.error('Lỗi khi xử lý lệnh filters:', error);
 
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({
-                name: lang.filters.embed.error,
+                name: "Lỗi",
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.filters.embed.errorProcessing);
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
+            .setDescription("Đã xảy ra lỗi khi áp dụng bộ lọc. Vui lòng thử lại sau.");
 
         if (interaction.replied || interaction.deferred) {
             await interaction.editReply({ embeds: [errorEmbed] });
@@ -102,25 +102,25 @@ async function filters(client, interaction, lang) {
 
 module.exports = {
     name: "filters",
-    description: "Control audio filters with buttons",
+    description: "Điều chỉnh bộ lọc âm thanh",
     permissions: "0x0000000000000800",
     options: [
         {
             name: 'filter',
-            description: 'Select a filter to apply',
+            description: 'Chọn bộ lọc để áp dụng',
             type: ApplicationCommandOptionType.String,
             required: true,
             choices: [
                 { name: 'Karaoke', value: 'karaoke' },
-                { name: 'Timescale', value: 'timescale' },
+                { name: 'Tăng tốc độ', value: 'timescale' },
                 { name: 'Tremolo', value: 'tremolo' },
                 { name: 'Vibrato', value: 'vibrato' },
                 { name: '3D', value: 'rotation' },
-                { name: 'Distortion', value: 'distortion' },
-                { name: 'Channel Mix', value: 'channelmix' },
-                { name: 'Low Pass', value: 'lowpass' },
-                { name: 'Bassboost', value: 'bassboost' },
-                { name: 'Clear Filters', value: 'clear' }
+                { name: 'Biến dạng', value: 'distortion' },
+                { name: 'Trộn kênh', value: 'channelmix' },
+                { name: 'Lọc âm thấp', value: 'lowpass' },
+                { name: 'Tăng bass', value: 'bassboost' },
+                { name: 'Xóa bộ lọc', value: 'clear' }
             ]
         }
     ],
