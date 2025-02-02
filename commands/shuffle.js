@@ -10,18 +10,18 @@ async function shuffle(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor(config.embedColor)
                 .setAuthor({
-                    name: lang.shuffle.embed.queueEmpty,
+                    name: "Danh sách phát trống",
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.shuffle.embed.queueEmptyDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
+                .setDescription("Không có bài hát nào trong danh sách phát để xáo trộn!")
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon });
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
         }
 
-        // Shuffle the queue
+        // Xáo trộn danh sách phát
         for (let i = player.queue.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [player.queue[i], player.queue[j]] = [player.queue[j], player.queue[i]];
@@ -30,25 +30,25 @@ async function shuffle(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setAuthor({
-                name: lang.shuffle.embed.queueShuffled,
+                name: "Đã xáo trộn danh sách phát",
                 iconURL: musicIcons.beats2Icon,
                 url: config.SupportServer
             })
-            .setDescription(lang.shuffle.embed.queueShuffledDescription)
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
+            .setDescription("Danh sách phát đã được xáo trộn thành công!")
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon });
 
         await interaction.reply({ embeds: [embed] });
     } catch (error) {
-        console.error('Error processing shuffle command:', error);
+        console.error('Lỗi khi thực hiện lệnh xáo trộn:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({
-                name: lang.shuffle.embed.error,
+                name: "Lỗi",
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.shuffle.embed.errorDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Đã xảy ra lỗi khi xáo trộn danh sách phát. Vui lòng thử lại sau!");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -56,7 +56,7 @@ async function shuffle(client, interaction, lang) {
 
 module.exports = {
     name: "shuffle",
-    description: "Shuffle the current song queue",
+    description: "Xáo trộn danh sách phát hiện tại",
     permissions: "0x0000000000000800",
     options: [],
     run: shuffle
