@@ -39,7 +39,7 @@ async function queue(client, interaction, lang) {
             return;
         }
 
-        // Paginate the queue
+        // Phân trang hàng đợi
         const songsPerPage = 10;
         const totalPages = Math.ceil((queue.length + (currentTrack ? 1 : 0)) / songsPerPage);
         const currentPage = 1;
@@ -50,12 +50,12 @@ async function queue(client, interaction, lang) {
 
             const queueItems = [];
             if (page === 1 && currentTrack) {
-                queueItems.push(`**Now Playing:** [${currentTrack.info.title}](${currentTrack.info.uri}) - Requested by: ${currentTrack.info.requester}`);
+                queueItems.push(`**Đang phát:** [${currentTrack.info.title}](${currentTrack.info.uri}) - Yêu cầu bởi: ${currentTrack.info.requester}`);
             }
 
             const paginatedQueue = queue.slice(start - (currentTrack ? 1 : 0), end - (currentTrack ? 1 : 0));
             paginatedQueue.forEach((track, index) => {
-                queueItems.push(`**${start + index + 1}.** [${track.info.title}](${track.info.uri}) - Requested by: ${track.info.requester}`);
+                queueItems.push(`**${start + index + 1}.** [${track.info.title}](${track.info.uri}) - Yêu cầu bởi: ${track.info.requester}`);
             });
 
             return queueItems.join('\n') || lang.queue.embed.noMoreSongs;
@@ -70,7 +70,7 @@ async function queue(client, interaction, lang) {
             })
             .setDescription(generateQueuePage(currentPage))
             .setFooter({
-                text: `Page ${currentPage} of ${totalPages} | ${lang.footer}`,
+                text: `Trang ${currentPage} của ${totalPages} | ${lang.footer}`,
                 iconURL: musicIcons.heartIcon
             });
 
@@ -93,7 +93,7 @@ async function queue(client, interaction, lang) {
 
 module.exports = {
     name: "queue",
-    description: "Show the current song queue",
+    description: "Hiển thị danh sách bài hát trong hàng đợi",
     permissions: "0x0000000000000800",
     options: [],
     run: queue
