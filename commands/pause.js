@@ -15,7 +15,7 @@ async function pause(client, interaction, lang) {
                     url: config.SupportServer
                 })
                 .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.pause.embed.noActivePlayer);
+                .setDescription("Không có bài hát nào đang phát.");
 
             await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
             return;
@@ -26,26 +26,26 @@ async function pause(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setAuthor({ 
-                name: lang.pause.embed.paused, 
+                name: "Bài hát đã được tạm dừng", 
                 iconURL: musicIcons.pauseresumeIcon,
                 url: config.SupportServer
             })
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.pause.embed.pausedDescription);
+            .setDescription("Bài hát hiện tại đã được tạm dừng.");
 
         await interaction.reply({ embeds: [embed] });
 
     } catch (error) {
-        console.error('Error processing pause command:', error);
+        console.error('Lỗi khi xử lý lệnh tạm dừng:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.pause.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
             .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.pause.embed.errorDescription);
+            .setDescription("Đã có lỗi xảy ra khi tạm dừng bài hát.");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -53,7 +53,7 @@ async function pause(client, interaction, lang) {
 
 module.exports = {
     name: "pause",
-    description: "Pause the current song",
+    description: "Tạm dừng bài hát hiện tại",
     permissions: "0x0000000000000800",
     options: [],
     run: pause
