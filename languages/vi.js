@@ -255,7 +255,7 @@ module.exports = {
     support: {
       embed: {
           authorName: "Máy Chủ Hỗ Trợ",
-          description: "➡️ **Tham gia máy chủ Discord của chúng tôi để được hỗ trợ và cập nhật:**\n- Discord - {supportServerLink}\n\n➡️ **Theo dõi chúng tôi tại:**\n- GitHub - {githubLink}\n- Replit - {replitLink}\n- YouTube - {youtubeLink}",
+          description: "➡️ **Tham gia máy chủ Discord của chúng tôi để được hỗ trợ và cập nhật:**\n- Discord - {supportServerLink}",
           error: "Lỗi",
           errorDescription: "- Đã xảy ra lỗi khi xử lý yêu cầu của bạn."
       }
