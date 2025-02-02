@@ -3,8 +3,8 @@
 module.exports = {
   TOKEN: "",
   language: "vi",
-  ownerID: ["1004206704994566164", ""], 
-  mongodbUri : "",
+  ownerID: ["1262464227348582492", ""], 
+  mongodbUri : "mongodb+srv://tca:tca@enzlewy.obwxx.mongodb.net/?retryWrites=true&w=majority",
   setupFilePath: './commands/setup.json',
   commandsDir: './commands',  
   embedColor: "#1db954",
