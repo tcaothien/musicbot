@@ -11,12 +11,12 @@ async function allPlaylists(client, interaction, lang) {
             const noPlaylistsEmbed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.allplaylists.embed.noPlaylistsFound, 
+                    name: "Không tìm thấy danh sách phát nào", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.allplaylists.embed.noPlaylistsFoundDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setDescription("Hiện tại không có danh sách phát công khai nào.")
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
 
             await interaction.reply({ embeds: [noPlaylistsEmbed] });
@@ -33,21 +33,21 @@ async function allPlaylists(client, interaction, lang) {
             const description = chunk
                 .map((playlist, idx) => 
                     `**${index * chunkSize + idx + 1}.** **${playlist.name}**\n` +
-                    `   - ${lang.allplaylists.embed.createdBy.replace("{userId}", `<@${playlist.userId}>`)}\n` +
-                    `   - ${lang.allplaylists.embed.serverName.replace("{serverName}", playlist.serverName)}\n` +
-                    `   - ${lang.allplaylists.embed.songs.replace("{songCount}", playlist.songs.length)}`
+                    `   - Được tạo bởi: <@${playlist.userId}>\n` +
+                    `   - Máy chủ: ${playlist.serverName}\n` +
+                    `   - Số bài hát: ${playlist.songs.length}`
                 )
                 .join('\n\n');
 
             return new EmbedBuilder()
                 .setColor('#00ff00')
                 .setAuthor({ 
-                    name: lang.allplaylists.embed.publicPlaylistsTitle.replace("{currentPage}", index + 1).replace("{totalPages}", chunks.length), 
+                    name: `Danh sách phát công khai (${index + 1}/${chunks.length})`, 
                     iconURL: musicIcons.playlistIcon,
                     url: config.SupportServer
                 })
                 .setDescription(description)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
         });
 
@@ -55,17 +55,17 @@ async function allPlaylists(client, interaction, lang) {
             await interaction.reply({ embeds: [embed] });
         }
     } catch (error) {
-        console.error('Error fetching playlists:', error);
+        console.error('Lỗi khi lấy danh sách phát:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.allplaylists.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp()
-            .setDescription(lang.allplaylists.embed.errorDescription);
+            .setDescription("Đã xảy ra lỗi khi lấy danh sách phát. Vui lòng thử lại sau.");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -73,7 +73,7 @@ async function allPlaylists(client, interaction, lang) {
 
 module.exports = {
     name: 'allplaylists',
-    description: 'List all public playlists',
+    description: 'Liệt kê tất cả danh sách phát công khai',
     permissions: '0x0000000000000800',
     run: allPlaylists
 };
