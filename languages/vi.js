@@ -1,5 +1,5 @@
 module.exports = {
-    footer: "Phát triển bởi SSRR | Prime Music v1.2",
+    footer: "Phát triển bởi New Life | Prime Music v1.2",
     ping: {
       description: "Kiểm tra độ trễ của bot",
       response: "Đang đo độ trễ...",
