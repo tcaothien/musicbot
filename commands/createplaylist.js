@@ -21,13 +21,13 @@ async function createPlaylist(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.createplaylist.embed.playlistExists, 
+                    name: "Danh sách phát đã tồn tại", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp()
-                .setDescription(lang.createplaylist.embed.playlistExistsDescription);
+                .setDescription("Danh sách phát với tên này đã tồn tại. Vui lòng chọn một tên khác.");
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
             return;
@@ -45,27 +45,27 @@ async function createPlaylist(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor('#00ff00')
             .setAuthor({ 
-                name: lang.createplaylist.embed.playlistCreated, 
+                name: "Danh sách phát đã được tạo", 
                 iconURL: musicIcons.correctIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp()
-            .setDescription(lang.createplaylist.embed.playlistCreatedDescription.replace("{playlistName}", playlistName).replace("{visibility}", isPrivate ? lang.createplaylist.embed.private : lang.createplaylist.embed.public));
+            .setDescription(`Danh sách phát **${playlistName}** đã được tạo thành công với chế độ ${isPrivate ? "Riêng tư" : "Công khai"}.`);
 
         await interaction.reply({ embeds: [embed] });
     } catch (error) {
-        console.error('Error creating playlist:', error);
+        console.error('Lỗi khi tạo danh sách phát:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.createplaylist.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp()
-            .setDescription(lang.createplaylist.embed.errorDescription);
+            .setDescription("Đã xảy ra lỗi khi tạo danh sách phát. Vui lòng thử lại sau.");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -73,18 +73,18 @@ async function createPlaylist(client, interaction, lang) {
 
 module.exports = {
     name: 'createplaylist',
-    description: 'Create a new playlist',
+    description: 'Tạo danh sách phát mới',
     permissions: '0x0000000000000800',
     options: [
         {
             name: 'name',
-            description: 'Enter playlist name',
+            description: 'Nhập tên danh sách phát',
             type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: 'private',
-            description: 'Set playlist as private (visible only to you)',
+            description: 'Đặt danh sách phát là riêng tư (chỉ bạn có thể xem)',
             type: ApplicationCommandOptionType.Boolean,
             required: true
         }
