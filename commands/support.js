@@ -4,7 +4,7 @@ const musicIcons = require('../UI/icons/musicicons.js');
 
 module.exports = {
     name: "support",
-    description: "Get support server link",
+    description: "Nhận liên kết máy chủ hỗ trợ",
     permissions: "0x0000000000000800",
     options: [],
     run: async (client, interaction, lang) => {
@@ -14,15 +14,11 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#b300ff')
                 .setAuthor({
-                    name: lang.support.embed.authorName,
+                    name: "Máy chủ hỗ trợ",
                     iconURL: musicIcons.beats2Icon, 
                     url: config.SupportServer
                 })
-                .setDescription(lang.support.embed.description
-                    .replace("{supportServerLink}", supportServerLink)
-                   
-                )
-               
+                .setDescription(`Nếu bạn cần hỗ trợ, hãy tham gia máy chủ hỗ trợ của chúng tôi tại: [Nhấp vào đây](${supportServerLink})`)
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed] });
@@ -31,12 +27,12 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({
-                    name: lang.support.embed.error,
+                    name: "Lỗi",
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.support.embed.errorDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon });
+                .setDescription("Đã xảy ra lỗi khi lấy liên kết máy chủ hỗ trợ. Vui lòng thử lại sau!")
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon });
 
             await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
         }
