@@ -10,10 +10,7 @@ module.exports = {
     run: async (client, interaction, lang) => {
         try {
             const supportServerLink = "https://discord.gg/NewLifes";
-            const githubLink = "https://www.facebook.com/gwwennn/";
-            const replitLink = "https://www.facebook.com/gwwennn/";
-            const youtubeLink = "https://www.facebook.com/gwwennn/";
-
+          
             const embed = new EmbedBuilder()
                 .setColor('#b300ff')
                 .setAuthor({
