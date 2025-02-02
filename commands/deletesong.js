@@ -13,12 +13,12 @@ async function deleteSong(client, interaction, lang) {
             const embed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.deletesong.embed.playlistNotFound, 
+                    name: "Không tìm thấy danh sách phát", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setDescription(lang.deletesong.embed.playlistNotFoundDescription)
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+                .setDescription("Danh sách phát bạn muốn chỉnh sửa không tồn tại.")
+                .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
@@ -29,27 +29,27 @@ async function deleteSong(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor('#00ff00')
             .setAuthor({ 
-                name: lang.deletesong.embed.songDeleted, 
+                name: "Đã xóa bài hát", 
                 iconURL: musicIcons.correctIcon,
                 url: config.SupportServer
             })
-            .setDescription(lang.deletesong.embed.songDeletedDescription.replace("{songName}", songName).replace("{playlistName}", playlistName))
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setDescription(`Bài hát **${songName}** đã được xóa khỏi danh sách phát **${playlistName}**.`)
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp();
 
         await interaction.reply({ embeds: [embed] });
     } catch (error) {
-        console.error('Error deleting song:', error);
+        console.error('Lỗi khi xóa bài hát:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.deletesong.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: "Hỗ trợ", iconURL: musicIcons.heartIcon })
             .setTimestamp()
-            .setDescription(lang.deletesong.embed.errorDescription);
+            .setDescription("Đã xảy ra lỗi khi xóa bài hát. Vui lòng thử lại sau.");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -57,18 +57,18 @@ async function deleteSong(client, interaction, lang) {
 
 module.exports = {
     name: 'deletesong',
-    description: 'Delete a song from a playlist',
+    description: 'Xóa một bài hát khỏi danh sách phát',
     permissions: '0x0000000000000800',
     options: [
         {
             name: 'playlist',
-            description: 'Enter playlist name',
+            description: 'Nhập tên danh sách phát',
             type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: 'song',
-            description: 'Enter song name',
+            description: 'Nhập tên bài hát',
             type: ApplicationCommandOptionType.String,
             required: true
         }
