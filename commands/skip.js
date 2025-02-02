@@ -10,12 +10,12 @@ async function skip(client, interaction, lang) {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setAuthor({ 
-                    name: lang.skip.embed.noActivePlayer, 
+                    name: "Không có trình phát nhạc đang hoạt động", 
                     iconURL: musicIcons.alertIcon,
                     url: config.SupportServer
                 })
-                .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-                .setDescription(lang.skip.embed.noActivePlayerDescription);
+                .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+                .setDescription("Hiện không có bài hát nào đang phát để bỏ qua!");
 
             await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
             return;
@@ -26,26 +26,26 @@ async function skip(client, interaction, lang) {
         const embed = new EmbedBuilder()
             .setColor(config.embedColor)
             .setAuthor({ 
-                name: lang.skip.embed.songSkipped, 
+                name: "Đã bỏ qua bài hát", 
                 iconURL: musicIcons.skipIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.skip.embed.songSkippedDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Bài hát hiện tại đã được bỏ qua!");
 
         await interaction.reply({ embeds: [embed] });
 
     } catch (error) {
-        console.error('Error processing skip command:', error);
+        console.error('Lỗi khi thực hiện lệnh bỏ qua:', error);
         const errorEmbed = new EmbedBuilder()
             .setColor('#ff0000')
             .setAuthor({ 
-                name: lang.skip.embed.error, 
+                name: "Lỗi", 
                 iconURL: musicIcons.alertIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: lang.footer, iconURL: musicIcons.heartIcon })
-            .setDescription(lang.skip.embed.errorDescription);
+            .setFooter({ text: "Cảm ơn bạn đã sử dụng bot!", iconURL: musicIcons.heartIcon })
+            .setDescription("Đã xảy ra lỗi khi bỏ qua bài hát. Vui lòng thử lại sau!");
 
         await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
@@ -53,7 +53,7 @@ async function skip(client, interaction, lang) {
 
 module.exports = {
     name: "skip",
-    description: "Skip the current song",
+    description: "Bỏ qua bài hát hiện tại",
     permissions: "0x0000000000000800",
     options: [],
     run: skip
